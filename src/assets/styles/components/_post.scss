@@ -9,13 +9,13 @@
   height: fit-content;
   border: 1px solid black;
   
-
   &__header {
     margin-bottom: 8px;
   }
 
   &__content {
     color: #333333;
+    width: 80%;
   }
 
   button {

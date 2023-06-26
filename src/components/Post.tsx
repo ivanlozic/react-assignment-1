@@ -38,11 +38,10 @@ const Post = ({ title, body, id, userId, userName }: PostProps): JSX.Element => 
       }
     }
 
-
-
     if (showComments) {
       fetchComments()
     }
+
 
   }, [id, userId, showComments])
 

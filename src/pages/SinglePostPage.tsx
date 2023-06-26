@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Post from '../components/Post'
 import HelloComponent from '../components/HelloComponent'
@@ -8,13 +8,24 @@ interface SinglePost {
   id: number
   title: string
   body: string
-  userName:string
+  userName: string
 }
 
 const SinglePostPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>()
   const [post, setPost] = useState<SinglePost | null>(null)
+  const [users, setUsers] = useState<{ id: number; name: string }[]>([])
+
   HelloComponent('Hello from', 'SinglePostPage')
+
+  const getUserName = useCallback(
+    (userId: number) => {
+      const user = users.find((user) => user.id === userId)
+      return user ? user.name : ''
+    },
+    [users]
+  )
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -26,6 +37,20 @@ const SinglePostPage = (): JSX.Element => {
       } catch (error) {
         console.error('Error fetching post:', error)
       }
+
+      const fetchUsers = async () => {
+        try {
+          const response = await fetch(
+            'https://jsonplaceholder.typicode.com/users'
+          )
+          const data = await response.json()
+          setUsers(data)
+        } catch (error) {
+          console.error('Error fetching users:', error)
+        }
+      }
+
+      fetchUsers()
     }
 
     fetchPost()
@@ -43,7 +68,7 @@ const SinglePostPage = (): JSX.Element => {
         id={post.id}
         body={post.body}
         userId={post.userId}
-        userName={post.userName}
+        userName={getUserName(post.userId)}
       />
 
       <Link to='/posts'>
