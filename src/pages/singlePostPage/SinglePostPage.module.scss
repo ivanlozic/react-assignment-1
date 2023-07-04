@@ -1,0 +1,18 @@
+.singlePostPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  button {
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: white;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+}
