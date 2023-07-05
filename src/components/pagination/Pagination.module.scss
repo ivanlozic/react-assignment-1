@@ -1,0 +1,16 @@
+.pagination {
+  margin: 10px 0;
+}
+.currentPage {
+  font-weight: bold;
+  margin: 0 30px;
+  text-decoration: underline;
+  pointer-events: none;
+}
+
+.paginationButton {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+}

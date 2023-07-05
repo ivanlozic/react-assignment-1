@@ -1,10 +1,6 @@
+import { CommentProps } from '../../constants/interfaces'
+import HelloComponent from '../helloComponent/HelloComponent'
 import styles from './Comment.module.scss'
-
-interface CommentProps {
-  name: string
-  body: string
-  email: string
-}
 
 const Comment = ({ name, body, email }: CommentProps): JSX.Element => {
   return (
@@ -16,4 +12,4 @@ const Comment = ({ name, body, email }: CommentProps): JSX.Element => {
   )
 }
 
-export default Comment
+export default HelloComponent(Comment)

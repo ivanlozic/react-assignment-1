@@ -1,58 +1,26 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useCallback} from 'react'
+import { useParams } from 'react-router-dom'
 import Post from '../../components/post/Post'
 import styles from './SinglePostPage.module.scss'
+import { SinglePost, User, } from '../../constants/interfaces'
+import HelloComponent from '../../components/helloComponent/HelloComponent'
+import { postsURL, usersURL } from '../../constants/constants'
+import useFetch from '../../hooks/useFetch/useFetch'
+import CustomRedirect from '../../components/customRedirect/customRedirect'
 
-interface SinglePost {
-  userId: number
-  id: number
-  title: string
-  body: string
-  userName: string
-}
 
 const SinglePostPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>()
-  const [post, setPost] = useState<SinglePost | null>(null)
-  const [users, setUsers] = useState<{ id: number; name: string }[]>([])
+  const { data: post } = useFetch<SinglePost>(`${postsURL}/${id}`)
+  const { data: users } = useFetch<User[]>(usersURL)
 
   const getUserName = useCallback(
     (userId: number) => {
-      const user = users.find((user) => user.id === userId)
+      const user = users?.find((user) => user.id === userId)
       return user ? user.name : ''
     },
     [users]
   )
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/posts/${id}`
-        )
-        const data = await response.json()
-        setPost(data)
-      } catch (error) {
-        console.error('Error fetching post:', error)
-      }
-
-      const fetchUsers = async () => {
-        try {
-          const response = await fetch(
-            'https://jsonplaceholder.typicode.com/users'
-          )
-          const data = await response.json()
-          setUsers(data)
-        } catch (error) {
-          console.error('Error fetching users:', error)
-        }
-      }
-
-      fetchUsers()
-    }
-
-    fetchPost()
-  }, [id])
 
   if (!post) {
     return <div>Loading...</div>
@@ -69,11 +37,11 @@ const SinglePostPage = (): JSX.Element => {
         userName={getUserName(post.userId)}
       />
 
-      <Link to='/posts'>
+      <CustomRedirect to='/posts'>
         <button>Go to Posts</button>
-      </Link>
+      </CustomRedirect>
     </div>
   )
 }
 
-export default SinglePostPage
+export default HelloComponent(SinglePostPage)

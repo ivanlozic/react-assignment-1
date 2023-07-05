@@ -1,0 +1,27 @@
+.notFound {
+    font-family: Poppins;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notFound h1 {
+    color: #c10016;
+    font-size: 5rem;
+}
+
+.notFound h2 {
+    color: #333333;
+    font-size: 2rem;
+}
+
+.notFound p {
+    color: #c10016;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}

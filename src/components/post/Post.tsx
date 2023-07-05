@@ -1,60 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Comment from '../comment/Comment'
 import styles from './Post.module.scss'
 import CustomRedirect from '../customRedirect/customRedirect'
-
-interface SingleComment {
-  postId: number
-  id: number
-  name: string
-  email: string
-  body: string
-}
-
-interface PostProps {
-  userId: number
-  id: number
-  title: string
-  body: string
-  userName: string
-}
+import { PostProps, SingleComment } from '../../constants/interfaces'
+import HelloComponent from '../helloComponent/HelloComponent'
+import useFetch from '../../hooks/useFetch/useFetch'
+import { commentsURL } from '../../constants/constants'
 
 const Post = ({
   title,
   body,
   id,
-  userId,
-  userName
+  userName,
+  showUnderline = false
 }: PostProps): JSX.Element => {
   const [showComments, setShowComments] = useState<boolean>(false)
-  const [comments, setComments] = useState<SingleComment[]>([])
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/comments?postId=${id}`
-        )
-        const data = await response.json()
-        setComments(data)
-      } catch (error) {
-        console.error('Error fetching comments:', error)
-      }
-    }
-
-    if (showComments) {
-      fetchComments()
-    }
-  }, [id, userId, showComments])
+  const { data: comments } = useFetch<SingleComment[]>(`${commentsURL}${id}`)
 
   const handleToggleComments = () => {
     setShowComments((prevState) => !prevState)
   }
+
+  const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1)
+
   return (
     <div className={styles.postCard} key={id}>
       <CustomRedirect to={`/post/${id}`} className='postLink'>
         <div className={styles.header}>
-          <h2>{title}</h2>
+          <h2 className={showUnderline ? styles.underline : ''}>
+            {capitalizedTitle}
+          </h2>
         </div>
       </CustomRedirect>
 
@@ -71,7 +46,7 @@ const Post = ({
       {showComments && (
         <div className={styles.comment}>
           <h3>Comments:</h3>
-          {comments.map((comment) => (
+          {comments?.map((comment) => (
             <Comment
               key={comment.id}
               name={comment.name}
@@ -85,4 +60,4 @@ const Post = ({
   )
 }
 
-export default Post
+export default HelloComponent(Post)
