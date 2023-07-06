@@ -32,3 +32,14 @@ export interface CommentProps {
   body: string
   email: string
 }
+
+export interface ToggleCommentsButtonProps {
+  showComments: boolean
+  handleToggleComments: () => void
+}
+
+export interface PaginationButtonProps {
+  onClick: () => void
+  disabled: boolean
+  children: React.ReactNode
+}

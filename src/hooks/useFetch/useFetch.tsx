@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { axiosInstance } from '../../config/axios'
 
 interface FetchData<T> {
   data: T | null
@@ -8,17 +9,19 @@ interface FetchData<T> {
 const useFetch = <T,>(url: string): FetchData<T> => {
   const [data, setData] = useState<T | null>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url)
-        const responseData = await response.json()
-        setData(responseData)
-      } catch (error) {
-        console.error('Error fetching users:', error)
-      }
-    }
+  const fetchData = (): void => {
+    axiosInstance
+      .get(url)
+      .then((res) => {
+        const response = res.data
+        setData(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
+  useEffect(() => {
     fetchData()
   }, [url])
 

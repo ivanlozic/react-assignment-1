@@ -1,26 +1,19 @@
-import { useCallback} from 'react'
 import { useParams } from 'react-router-dom'
 import Post from '../../components/post/Post'
 import styles from './SinglePostPage.module.scss'
-import { SinglePost, User, } from '../../constants/interfaces'
+import { SinglePost } from '../../constants/interfaces'
 import HelloComponent from '../../components/helloComponent/HelloComponent'
-import { postsURL, usersURL } from '../../constants/constants'
+import { axiosRoutes } from '../../constants/constants'
 import useFetch from '../../hooks/useFetch/useFetch'
 import CustomRedirect from '../../components/customRedirect/customRedirect'
-
+import useUser from '../../hooks/useUser/useUser'
 
 const SinglePostPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>()
-  const { data: post } = useFetch<SinglePost>(`${postsURL}/${id}`)
-  const { data: users } = useFetch<User[]>(usersURL)
-
-  const getUserName = useCallback(
-    (userId: number) => {
-      const user = users?.find((user) => user.id === userId)
-      return user ? user.name : ''
-    },
-    [users]
+  const { data: post } = useFetch<SinglePost>(
+    `${axiosRoutes.posts.POSTS}/${id}`
   )
+  const { getUserName } = useUser()
 
   if (!post) {
     return <div>Loading...</div>

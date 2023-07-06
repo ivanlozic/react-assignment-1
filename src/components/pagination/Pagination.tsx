@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Pagination.module.scss'
 import HelloComponent from '../helloComponent/HelloComponent'
+import PaginationButton from '../button/toggleComment/paginationButton/paginationButton'
 
 interface PaginationProps {
   currentPage: number
@@ -24,13 +25,19 @@ const Pagination = ({
 
   return (
     <div className={styles.pagination}>
-      <button className={styles.paginationButton} onClick={handlePreviousPage} disabled={currentPage === 1}>
+      <PaginationButton
+        onClick={handlePreviousPage}
+        disabled={currentPage === 1}
+      >
         Previous
-      </button>
+      </PaginationButton>
       <span className={styles.currentPage}>{currentPage}</span>
-      <button className={styles.paginationButton}  onClick={handleNextPage} disabled={currentPage === totalPages}>
+      <PaginationButton
+        onClick={handleNextPage}
+        disabled={currentPage === totalPages}
+      >
         Next
-      </button>
+      </PaginationButton>
     </div>
   )
 }

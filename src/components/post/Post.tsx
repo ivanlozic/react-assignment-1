@@ -5,7 +5,8 @@ import CustomRedirect from '../customRedirect/customRedirect'
 import { PostProps, SingleComment } from '../../constants/interfaces'
 import HelloComponent from '../helloComponent/HelloComponent'
 import useFetch from '../../hooks/useFetch/useFetch'
-import { commentsURL } from '../../constants/constants'
+import { axiosRoutes } from '../../constants/constants'
+import ToggleCommentsButton from '../button/toggleComment/toggleComment'
 
 const Post = ({
   title,
@@ -15,7 +16,7 @@ const Post = ({
   showUnderline = false
 }: PostProps): JSX.Element => {
   const [showComments, setShowComments] = useState<boolean>(false)
-  const { data: comments } = useFetch<SingleComment[]>(`${commentsURL}${id}`)
+  const { data: comments } = useFetch<SingleComment[]>(`${axiosRoutes.comments.COMMENTS}${id}`)
 
   const handleToggleComments = () => {
     setShowComments((prevState) => !prevState)
@@ -40,9 +41,11 @@ const Post = ({
         <p>{body}</p>
       </div>
 
-      <button onClick={handleToggleComments}>
-        {showComments ? 'Hide Comments' : 'Show Comments'}
-      </button>
+      <ToggleCommentsButton
+        showComments={showComments}
+        handleToggleComments={handleToggleComments}
+      />
+      
       {showComments && (
         <div className={styles.comment}>
           <h3>Comments:</h3>
