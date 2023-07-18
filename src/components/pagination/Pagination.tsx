@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Pagination.module.scss'
-import HelloComponent from '../helloComponent/HelloComponent'
-import PaginationButton from '../button/toggleComment/paginationButton/paginationButton'
+import HelloComponent from '../hoc/helloComponent/HelloComponent'
+import { PaginationButton } from '../button/pagination-button'
 
 interface PaginationProps {
   currentPage: number

@@ -1,5 +1,5 @@
 import { CommentProps } from '../../constants/interfaces'
-import HelloComponent from '../helloComponent/HelloComponent'
+import HelloComponent from '../hoc/helloComponent/HelloComponent'
 import styles from './Comment.module.scss'
 
 const Comment = ({ name, body, email }: CommentProps): JSX.Element => {

@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom'
-import Post from '../../components/post/Post'
+import { Post } from '../../components/post'
 import styles from './SinglePostPage.module.scss'
 import { SinglePost } from '../../constants/interfaces'
-import HelloComponent from '../../components/helloComponent/HelloComponent'
+import HelloComponent from '../../components/hoc/helloComponent/HelloComponent'
 import { axiosRoutes } from '../../constants/constants'
 import useFetch from '../../hooks/useFetch/useFetch'
-import CustomRedirect from '../../components/customRedirect/customRedirect'
+import { CustomRedirect } from '../../components/custom-redirect'
 import useUser from '../../hooks/useUser/useUser'
 
 const SinglePostPage = (): JSX.Element => {

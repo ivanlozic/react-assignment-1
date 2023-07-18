@@ -1,6 +1,6 @@
 import React from 'react'
-import { useHello } from '../../hooks/useHello/useHello'
-import { HELLO_MESSAGE } from '../../constants/constants'
+import { useHello } from '../../../hooks/useHello/useHello'
+import { HELLO_MESSAGE } from '../../../constants/constants'
 
 const HelloComponent = <P extends object>(
   Component: React.ComponentType<P>

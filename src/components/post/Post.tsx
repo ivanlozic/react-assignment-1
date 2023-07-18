@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import Comment from '../comment/Comment'
+import { Comment } from '../comment'
 import styles from './Post.module.scss'
-import CustomRedirect from '../customRedirect/customRedirect'
+import { CustomRedirect } from '../custom-redirect'
 import { PostProps, SingleComment } from '../../constants/interfaces'
-import HelloComponent from '../helloComponent/HelloComponent'
+import HelloComponent from '../hoc/helloComponent/HelloComponent'
 import useFetch from '../../hooks/useFetch/useFetch'
 import { axiosRoutes } from '../../constants/constants'
-import ToggleCommentsButton from '../button/toggleComment/toggleComment'
+import { ToggleCommentsButton } from '../button/toggle-comment'
 
 const Post = ({
   title,
@@ -16,7 +16,9 @@ const Post = ({
   showUnderline = false
 }: PostProps): JSX.Element => {
   const [showComments, setShowComments] = useState<boolean>(false)
-  const { data: comments } = useFetch<SingleComment[]>(`${axiosRoutes.comments.COMMENTS}${id}`)
+  const { data: comments } = useFetch<SingleComment[]>(
+    `${axiosRoutes.comments.COMMENTS}${id}`
+  )
 
   const handleToggleComments = () => {
     setShowComments((prevState) => !prevState)
@@ -45,7 +47,7 @@ const Post = ({
         showComments={showComments}
         handleToggleComments={handleToggleComments}
       />
-      
+
       {showComments && (
         <div className={styles.comment}>
           <h3>Comments:</h3>

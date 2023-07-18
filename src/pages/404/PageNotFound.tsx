@@ -1,4 +1,5 @@
-import CustomRedirect from '../../components/customRedirect/customRedirect'
+import React from 'react'
+import { CustomRedirect } from '../../components/custom-redirect'
 import styles from './PageNotFound.module.scss'
 
 const PageNotFound = (): JSX.Element => {
