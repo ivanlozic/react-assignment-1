@@ -1,3 +1,3 @@
-import PaginationButton from './paginationButton'
+import PaginationButton from './paginationButton';
 
-export { PaginationButton }
+export { PaginationButton };

@@ -1,31 +1,31 @@
-import { useState, useEffect } from 'react'
-import { axiosInstance } from '../../config/axios'
+import { useState, useEffect } from 'react';
+import { axiosInstance } from '../../config/axios';
 
 interface FetchData<T> {
-  data: T | null
-  setData: React.Dispatch<React.SetStateAction<T | null>>
+  data: T | null;
+  setData: React.Dispatch<React.SetStateAction<T | null>>;
 }
 
 const useFetch = <T,>(url: string): FetchData<T> => {
-  const [data, setData] = useState<T | null>(null)
+  const [data, setData] = useState<T | null>(null);
 
   const fetchData = (): void => {
     axiosInstance
       .get(url)
       .then((res) => {
-        const response = res.data
-        setData(response)
+        const response = res.data;
+        setData(response);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
-    fetchData()
-  }, [url])
+    fetchData();
+  }, [url]);
 
-  return { data, setData }
-}
+  return { data, setData };
+};
 
-export default useFetch
+export default useFetch;

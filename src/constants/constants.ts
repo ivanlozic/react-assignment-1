@@ -1,13 +1,13 @@
-export const HELLO_MESSAGE = 'Hello from '
+export const HELLO_MESSAGE = 'Hello from ';
 
 export const axiosRoutes = {
   posts: {
-    POSTS: '/posts'
+    POSTS: '/posts',
   },
   user: {
-    USERS: '/users'
+    USERS: '/users',
   },
   comments: {
-    COMMENTS: '/comments?postId='
-  }
-}
+    COMMENTS: '/comments?postId=',
+  },
+};

@@ -1,17 +1,17 @@
-import React from 'react'
-import styles from '../../pagination/Pagination.module.scss'
+import React from 'react';
+import styles from '../../pagination/Pagination.module.scss';
 
 interface PaginationButtonProps {
-  onClick: () => void
-  disabled?: boolean
-  active?: boolean
-  children: React.ReactNode
+  onClick: () => void;
+  disabled?: boolean;
+  active?: boolean;
+  children: React.ReactNode;
 }
 
 const PaginationButton = ({
   onClick,
   disabled,
-  children
+  children,
 }: PaginationButtonProps): JSX.Element => {
   return (
     <button
@@ -21,7 +21,7 @@ const PaginationButton = ({
     >
       {children}
     </button>
-  )
-}
+  );
+};
 
-export default PaginationButton
+export default PaginationButton;

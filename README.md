@@ -8,15 +8,15 @@ Follow the steps below to build and run the project locally.
 
 ### Prerequisites
 
-- Node.js 
+- Node.js
 - npm
 
 ### Installation
 
 1. Clone the repository:
-   
+
 git clone https://github.com/ivanlozic/react-assignment.git
 
-2. npm install 
+2. npm install
 
 3. npm start

@@ -12,12 +12,8 @@ const CustomRedirect = ({
   children,
   className,
 }: CustomRedirectProps): JSX.Element => {
-  const handleRedirect = () => {
-    window.location.href = to;
-  };
-
   return (
-    <Link to={to} className={className} onClick={handleRedirect}>
+    <Link to={to} className={className}>
       {children}
     </Link>
   );

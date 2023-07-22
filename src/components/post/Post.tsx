@@ -1,34 +1,30 @@
-import React, { useState } from 'react'
-import { Comment } from '../comment'
-import styles from './Post.module.scss'
-import { CustomRedirect } from '../custom-redirect'
-import { PostProps, SingleComment } from '../../constants/interfaces'
-import HelloComponent from '../hoc/helloComponent/HelloComponent'
-import useFetch from '../../hooks/useFetch/useFetch'
-import { axiosRoutes } from '../../constants/constants'
-import { ToggleCommentsButton } from '../button/toggle-comment'
+import React, { useState } from 'react';
+import { Comment } from '../comment';
+import styles from './Post.module.scss';
+import { CustomRedirect } from '../custom-redirect';
+import { PostProps, SingleComment } from '../../constants/interfaces';
+import HelloComponent from '../hoc/helloComponent/HelloComponent';
+import { ToggleCommentsButton } from '../button/toggle-comment';
 
 const Post = ({
   title,
   body,
   id,
   userName,
-  showUnderline = false
+  comments,
+  showUnderline = false,
 }: PostProps): JSX.Element => {
-  const [showComments, setShowComments] = useState<boolean>(false)
-  const { data: comments } = useFetch<SingleComment[]>(
-    `${axiosRoutes.comments.COMMENTS}${id}`
-  )
+  const [showComments, setShowComments] = useState<boolean>(false);
 
   const handleToggleComments = () => {
-    setShowComments((prevState) => !prevState)
-  }
+    setShowComments((prevState) => !prevState);
+  };
 
-  const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1)
+  const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
 
   return (
     <div className={styles.postCard} key={id}>
-      <CustomRedirect to={`/post/${id}`} className='postLink'>
+      <CustomRedirect to={`/post/${id}`} className="postLink">
         <div className={styles.header}>
           <h2 className={showUnderline ? styles.underline : ''}>
             {capitalizedTitle}
@@ -51,7 +47,7 @@ const Post = ({
       {showComments && (
         <div className={styles.comment}>
           <h3>Comments:</h3>
-          {comments?.map((comment) => (
+          {comments?.map((comment: SingleComment) => (
             <Comment
               key={comment.id}
               name={comment.name}
@@ -62,7 +58,7 @@ const Post = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default HelloComponent(Post)
+export default HelloComponent(Post);

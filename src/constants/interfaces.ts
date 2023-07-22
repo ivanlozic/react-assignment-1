@@ -25,6 +25,7 @@ export interface PostProps {
   body: string;
   userName: string;
   showUnderline?: boolean;
+  comments: SingleComment[];
 }
 
 export interface CommentProps {

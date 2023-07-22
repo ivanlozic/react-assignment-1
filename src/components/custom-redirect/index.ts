@@ -1,3 +1,3 @@
-import CustomRedirect from './customRedirect'
+import CustomRedirect from './customRedirect';
 
-export { CustomRedirect }
+export { CustomRedirect };

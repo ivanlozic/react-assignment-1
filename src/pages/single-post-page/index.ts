@@ -1,4 +1,3 @@
-import SinglePostPage from "./SinglePostPage";
+import SinglePostPage from './SinglePostPage';
 
-
-export {SinglePostPage} 
+export { SinglePostPage };

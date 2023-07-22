@@ -1,3 +1,3 @@
-import ToggleCommentsButton from './toggleComment'
+import ToggleCommentsButton from './toggleComment';
 
-export { ToggleCommentsButton }
+export { ToggleCommentsButton };
