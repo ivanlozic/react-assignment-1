@@ -25,7 +25,7 @@ const PostsPage = (): JSX.Element => {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalFilteredPosts = filteredPosts.length;
-
+  
   const fetchCommentsForPost = async (id: number): Promise<SingleComment[]> => {
     try {
       const response = await axiosInstance.get(
@@ -67,6 +67,7 @@ const PostsPage = (): JSX.Element => {
       fetchComments();
     }
   }, [posts, filter, getUserName]);
+
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);

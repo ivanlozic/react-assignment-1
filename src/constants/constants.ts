@@ -11,3 +11,13 @@ export const axiosRoutes = {
     COMMENTS: '/comments?postId=',
   },
 };
+
+export const ovalSpinner = {
+  height: 40,
+  width: 40,
+  color: 'black',
+  ariaLabel: 'oval-loading',
+  secondaryColor: 'grey',
+  strokeWidth: 4,
+  strokeWidthSecondary: 4
+}

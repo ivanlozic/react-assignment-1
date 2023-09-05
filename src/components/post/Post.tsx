@@ -6,6 +6,7 @@ import { PostProps, SingleComment } from '../../constants/interfaces';
 import HelloComponent from '../hoc/helloComponent/HelloComponent';
 import { ToggleCommentsButton } from '../button/toggle-comment';
 
+
 const Post = ({
   title,
   body,

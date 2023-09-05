@@ -7,6 +7,7 @@ import { axiosRoutes } from '../../constants/constants';
 import useFetch from '../../hooks/useFetch/useFetch';
 import { CustomRedirect } from '../../components/custom-redirect';
 import useUser from '../../hooks/useUser/useUser';
+import { Spinner } from '../../components/spinner';
 
 const SinglePostPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +20,7 @@ const SinglePostPage = (): JSX.Element => {
   const { getUserName } = useUser();
 
   if (!post) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
