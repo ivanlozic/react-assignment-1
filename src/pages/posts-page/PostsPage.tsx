@@ -9,6 +9,8 @@ import { axiosRoutes } from '../../constants/constants';
 import useFetch from '../../hooks/useFetch/useFetch';
 import useUser from '../../hooks/useUser/useUser';
 import { axiosInstance } from '../../config/axios';
+import { Spinner } from '../../components/spinner';
+import { LoginForm } from '../../components/login-form';
 
 const PostsPage = (): JSX.Element => {
   const [filter, setFilter] = useState<string>('');
@@ -21,6 +23,7 @@ const PostsPage = (): JSX.Element => {
   const [comments, setComments] = useState<{ [key: number]: SingleComment[] }>(
     {}
   );
+  
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
@@ -82,6 +85,7 @@ const PostsPage = (): JSX.Element => {
     <div className={styles.postPage}>
       <h1>Posts Page</h1>
 
+      <LoginForm />
       <input
         type="text"
         placeholder="Filter posts by username"
@@ -103,7 +107,7 @@ const PostsPage = (): JSX.Element => {
           />
         ))
       ) : (
-        <p>No response</p>
+        <Spinner />
       )}
 
       {totalFilteredPosts > itemsPerPage && (
