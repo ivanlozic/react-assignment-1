@@ -11,6 +11,7 @@ import useUser from '../../hooks/useUser/useUser';
 import { axiosInstance } from '../../config/axios';
 import { Spinner } from '../../components/spinner';
 import { LoginForm } from '../../components/login-form';
+import { Header } from '../../components/header';
 
 const PostsPage = (): JSX.Element => {
   const [filter, setFilter] = useState<string>('');
@@ -23,6 +24,7 @@ const PostsPage = (): JSX.Element => {
   const [comments, setComments] = useState<{ [key: number]: SingleComment[] }>(
     {}
   );
+  const [user] = useState(null);
   
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
@@ -84,8 +86,16 @@ const PostsPage = (): JSX.Element => {
   return (
     <div className={styles.postPage}>
       <h1>Posts Page</h1>
-
-      <LoginForm />
+      <div className={styles.header}>
+    
+      {user ? (
+        <Header user={user} />
+      ) : (
+    
+        <LoginForm />
+      )}
+     
+    </div>
       <input
         type="text"
         placeholder="Filter posts by username"

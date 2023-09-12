@@ -25,8 +25,8 @@ const LoginForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type='submit'>Log In</button>
-      <Link to='/register' className={styles.button}>Sign up</Link>
+      <button type='submit' className={styles.button}>Log In</button>
+      <Link to='/register'><button className={styles.button}>Sign up</button></Link>
     </form>
   )
 }

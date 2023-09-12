@@ -1,0 +1,67 @@
+.header-container {
+    padding: 16px;
+
+}
+
+.user-info {
+    margin-bottom: 16px;
+}
+
+.user-info p {
+    font-size: 24px;
+}
+
+form{
+    padding: 20px;
+    border: 2px solid black;
+    margin: 10px 0;
+    background-color: white;
+}
+
+.post-textarea {
+    width: 85%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.create-post-button,.logout-button {
+    background-color:black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.posts-section {
+    margin-top: 16px;
+}
+
+.posts-section h2 {
+    font-size: 24px;
+}
+
+
+.post {
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-text {
+    font-size: 16px;
+}
+
+.post-actions {
+    margin-top: 8px;
+}
+
+.post-actions button {
+    margin-right: 8px;
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
