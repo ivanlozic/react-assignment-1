@@ -32,7 +32,6 @@ const RegisterPage = () => {
       setPasswordMatchError('Passwords do not match');
       return;
     }
-
     alert('User registered successfully');
     navigate('/');
   };
