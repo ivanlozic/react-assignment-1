@@ -2,13 +2,25 @@ import React, { useState,FormEvent } from 'react'
 import styles from './LoginForm.module.scss'
 import HelloComponent from '../hoc/helloComponent/HelloComponent'
 import { Link } from 'react-router-dom'
+import { loginUser } from '../../reduxStore/authSlice'
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    console.log('Logging in with:', username, password);
+
+    if (username === 'exampleUser' && password === 'password') {
+      dispatch(loginUser({id:2,name:'Ivan'}));
+      console.log('Login successful');
+      
+    } else {
+      console.error('Login failed');
+    }
   }
 
   return (

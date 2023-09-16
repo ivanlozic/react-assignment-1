@@ -12,6 +12,8 @@ import { axiosInstance } from '../../config/axios';
 import { Spinner } from '../../components/spinner';
 import { LoginForm } from '../../components/login-form';
 import { Header } from '../../components/header';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../reduxStore/store';
 
 const PostsPage = (): JSX.Element => {
   const [filter, setFilter] = useState<string>('');
@@ -24,7 +26,7 @@ const PostsPage = (): JSX.Element => {
   const [comments, setComments] = useState<{ [key: number]: SingleComment[] }>(
     {}
   );
-  const [user] = useState(null);
+  const user = useSelector((state: RootState) => state.auth.user);
   
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
@@ -87,14 +89,12 @@ const PostsPage = (): JSX.Element => {
     <div className={styles.postPage}>
       <h1>Posts Page</h1>
       <div className={styles.header}>
-    
+      
       {user ? (
-        <Header user={user} />
-      ) : (
-    
-        <LoginForm />
-      )}
-     
+  <Header user={user} />
+) : (
+  <LoginForm />
+)}
     </div>
       <input
         type="text"

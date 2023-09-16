@@ -1,16 +1,33 @@
 .header-container {
     padding: 16px;
-
 }
 
 .user-info {
     margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-menu{
+    display: flex;
+    align-items: center;
+
 }
 
 .user-info p {
     font-size: 24px;
 }
 
+.user-text{
+    margin-right: 10px;
+}
+.user-icon {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 form{
     padding: 20px;
     border: 2px solid black;
@@ -23,15 +40,6 @@ form{
     padding: 8px;
     font-size: 16px;
     margin-bottom: 8px;
-}
-
-.create-post-button,.logout-button {
-    background-color:black;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    margin-right: 10px;
 }
 
 .posts-section {
@@ -65,3 +73,13 @@ form{
     font-size: 14px;
     cursor: pointer;
 }
+
+.dropdown-button,.create-post-button{
+    background-color:black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin: 10px 10px;
+}
+
