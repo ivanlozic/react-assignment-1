@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith('address.')) {
@@ -93,9 +93,8 @@ const RegisterPage = () => {
           zipcode: formData.address.zipcode,
         },
       };
-
+      
       console.log('Post Data:', postData);
-
       alert('User registered successfully');
     }
   };
@@ -135,7 +134,9 @@ const RegisterPage = () => {
             placeholder="Email"
             required
           />
-          {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
+          {errors.email && (
+            <p className={styles.errorMessage}>{errors.email}</p>
+          )}
         </div>
         <div className={styles.formGroup}>
           <input
