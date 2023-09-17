@@ -8,8 +8,15 @@ export interface SinglePost {
 export interface User {
   id: number;
   name: string;
+  email: string;
+  username: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+  };
 }
-
 export interface SingleComment {
   postId: number;
   id: number;
