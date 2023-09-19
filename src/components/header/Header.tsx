@@ -63,7 +63,7 @@ const Header = ({ user }: HeaderProps): JSX.Element => {
     axiosInstance
       .post(`${axiosRoutes.posts.POSTS}`, postData)
       .then(() => {
-        console.log(postData);
+        console.log('New post created',postData);
         setNewPostTitle('');
         setNewPostText('');
       })

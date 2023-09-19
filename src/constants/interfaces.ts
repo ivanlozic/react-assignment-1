@@ -39,6 +39,8 @@ export interface CommentProps {
   name: string;
   body: string;
   email: string;
+  postId: number;
+  id: number;
 }
 
 export interface ToggleCommentsButtonProps {

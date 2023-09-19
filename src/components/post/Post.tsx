@@ -99,8 +99,8 @@ const Post = ({
 
       {isCurrentUserAuthor && (
         <div className={styles.editDeleteButtons}>
-          <button onClick={handleOpenEditModal}>Edit</button>
-          <button onClick={handleDeletePost}>Delete</button>
+          <button onClick={handleOpenEditModal}>Edit Post</button>
+          <button onClick={handleDeletePost}>Delete Post</button>
         </div>
       )}
       {showComments && (
@@ -109,6 +109,8 @@ const Post = ({
           {comments?.map((comment: SingleComment) => (
             <Comment
               key={comment.id}
+              id= {comment.id}
+              postId= {id}
               name={comment.name}
               email={comment.email}
               body={comment.body}
