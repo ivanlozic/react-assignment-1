@@ -2,19 +2,16 @@ import React, { useState, FormEvent } from 'react';
 import styles from './LoginForm.module.scss';
 import HelloComponent from '../hoc/helloComponent/HelloComponent';
 import { Link } from 'react-router-dom';
-import { loginUser } from '../../reduxStore/authSlice';
+import { loginUser } from '../../reduxStore/reducers/authSlice';
 import { useDispatch } from 'react-redux';
 import { User } from '../../constants/interfaces';
 import useFetch from '../../hooks/useFetch/useFetch';
 import { axiosRoutes } from '../../constants/constants';
 
-
 const LoginForm = () => {
   const [username, setName] = useState('');
   const [password, setPassword] = useState('');
-  const { data: usersData } = useFetch<Array<User>>(
-    axiosRoutes.user.USERS
-  );
+  const { data: usersData } = useFetch<Array<User>>(axiosRoutes.user.USERS);
 
   const dispatch = useDispatch();
 

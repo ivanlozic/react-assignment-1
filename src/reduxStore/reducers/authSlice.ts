@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { User } from "../constants/interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { User } from '../../constants/interfaces';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -12,7 +12,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     loginUser: (state, action) => {

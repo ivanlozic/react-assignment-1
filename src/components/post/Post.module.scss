@@ -14,11 +14,13 @@
     padding: 15px;
     font-size: 18px;
     border-radius: 10px;
-    background-color: white;
+    background-color: rgb(0, 0, 0);
+    background-color: black;
+    color: white;
 
     &:hover {
-      background-color: black;
-      color: white;
+      background-color: rgb(253, 252, 252);
+      color: rgb(2, 2, 2);
     }
   }
 }
@@ -42,4 +44,72 @@
   margin-top: 20px;
   margin-right: 10px;
   }
+}
+
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+
+.modalTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modalTextarea {
+  width: 90%;
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+
+.modalButtons {
+  margin-top: 20px;
+}
+
+
+.modalButtonOk,.modalButtonCancel {
+  background-color: #040404; 
+  color: #fff;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.modalCloseButton {
+  background-color: #040404; 
+  color: #fff;
+  position: absolute;
+  padding: 6px 15px;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+  font-size: 40px;
+  cursor: pointer;
 }

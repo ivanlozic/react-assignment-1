@@ -41,6 +41,7 @@ export interface CommentProps {
   email: string;
   postId: number;
   id: number;
+ 
 }
 
 export interface ToggleCommentsButtonProps {

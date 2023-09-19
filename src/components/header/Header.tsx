@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../../constants/interfaces';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../reduxStore/authSlice';
+import { logoutUser } from '../../reduxStore/reducers/authSlice';
 import { Link } from 'react-router-dom';
 import { axiosRoutes } from '../../constants/constants';
 import { axiosInstance } from '../../config/axios';
@@ -63,7 +63,7 @@ const Header = ({ user }: HeaderProps): JSX.Element => {
     axiosInstance
       .post(`${axiosRoutes.posts.POSTS}`, postData)
       .then(() => {
-        console.log('New post created',postData);
+        console.log('New post created', postData);
         setNewPostTitle('');
         setNewPostText('');
       })

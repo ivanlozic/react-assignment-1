@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../reduxStore/store';
 import { User } from '../../constants/interfaces';
-import { updateUser } from '../../reduxStore/authSlice';
+import { updateUser } from '../../reduxStore/reducers/authSlice';
 import styles from './EditProfilePage.module.scss';
+import { RootState } from '../../reduxStore/store';
 
 const EditProfilePage = () => {
   const dispatch = useDispatch();

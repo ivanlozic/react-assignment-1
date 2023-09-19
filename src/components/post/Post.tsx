@@ -4,12 +4,12 @@ import styles from './Post.module.scss';
 import { CustomRedirect } from '../custom-redirect';
 import { PostProps, SingleComment } from '../../constants/interfaces';
 import HelloComponent from '../hoc/helloComponent/HelloComponent';
-import Modal from 'react-modal'
+import Modal from 'react-modal';
 import { ToggleCommentsButton } from '../button/toggle-comment';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../reduxStore/store';
 import { axiosRoutes } from '../../constants/constants';
 import { axiosInstance } from '../../config/axios';
+import { RootState } from '../../reduxStore/store';
 
 const Post = ({
   title,
@@ -24,12 +24,15 @@ const Post = ({
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [editedBody, setEditedBody] = useState<string>(body);
 
+
   const isCurrentUserAuthor = user?.name === userName;
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
 
   const handleToggleComments = () => {
     setShowComments((prevState) => !prevState);
   };
+
+ 
 
   const handleOpenEditModal = () => {
     setEditedBody(body);
@@ -41,17 +44,16 @@ const Post = ({
   };
 
   const handleEditPost = () => {
-    
     const updatedPostData = {
-      id, 
+      id,
       title,
       userName,
       comments,
-      body: editedBody, 
+      body: editedBody,
     };
-  
+
     axiosInstance
-      .put(`${axiosRoutes.posts.POSTS}/${id}` , updatedPostData)
+      .put(`${axiosRoutes.posts.POSTS}/${id}`, updatedPostData)
       .then((response) => {
         console.log('Post updated successfully', response.data);
         setIsEditModalOpen(false);
@@ -64,14 +66,14 @@ const Post = ({
   const handleDeletePost = () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
       axiosInstance
-      .delete(`${axiosRoutes.posts.POSTS}/${id}`)
-      .then((response) => {
-        alert('Post deleted successfully')
-        console.log('Post deleted successfully', response.data);
-      })
-      .catch((error) => {
-        console.error('Error deleting post', error);
-      });
+        .delete(`${axiosRoutes.posts.POSTS}/${id}`)
+        .then((response) => {
+          alert('Post deleted successfully');
+          console.log('Post deleted successfully', response.data);
+        })
+        .catch((error) => {
+          console.error('Error deleting post', error);
+        });
     }
   };
 
@@ -103,14 +105,15 @@ const Post = ({
           <button onClick={handleDeletePost}>Delete Post</button>
         </div>
       )}
+
       {showComments && (
         <div className={styles.comment}>
           <h3>Comments:</h3>
           {comments?.map((comment: SingleComment) => (
             <Comment
               key={comment.id}
-              id= {comment.id}
-              postId= {id}
+              id={comment.id}
+              postId={id}
               name={comment.name}
               email={comment.email}
               body={comment.body}
@@ -123,15 +126,33 @@ const Post = ({
         isOpen={isEditModalOpen}
         onRequestClose={handleCloseEditModal}
         contentLabel="Edit Post Modal"
+        className={styles.modalContainer}
+        ariaHideApp={false}
       >
-        <h2>Edit Post</h2>
-        <textarea
-          value={editedBody}
-          onChange={(e) => setEditedBody(e.target.value)}
-        />
-        <div>
-          <button onClick={handleEditPost}>OK</button>
-          <button onClick={handleCloseEditModal}>Cancel</button>
+        <div className={styles.modalContent}>
+          <h2 className={styles.modalTitles}>Edit Post</h2>
+          <textarea
+            value={editedBody}
+            onChange={(e) => setEditedBody(e.target.value)}
+            className={styles.modalTextarea}
+          />
+          <div className={styles.modalButtons}>
+            <button onClick={handleEditPost} className={styles.modalButtonOk}>
+              OK
+            </button>
+            <button
+              onClick={handleCloseEditModal}
+              className={styles.modalButtonCancel}
+            >
+              Cancel
+            </button>
+          </div>
+          <span
+            className={styles.modalCloseButton}
+            onClick={handleCloseEditModal}
+          >
+            &times;
+          </span>
         </div>
       </Modal>
     </div>

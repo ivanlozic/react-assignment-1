@@ -5,7 +5,8 @@ import HelloComponent from '../hoc/helloComponent/HelloComponent';
 import styles from './Comment.module.scss';
 import { RootState } from '../../reduxStore/store';
 
-const Comment = ({ name, body, email, id, postId }: CommentProps): JSX.Element => {
+
+const Comment = ({ name, body, email,id, postId}: CommentProps): JSX.Element => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [commentText, setCommentText] = useState(body);
   const [isEditing, setIsEditing] = useState(false);
@@ -13,10 +14,11 @@ const Comment = ({ name, body, email, id, postId }: CommentProps): JSX.Element =
   const handleEdit = () => {
     setIsEditing(true);
   };
-
-  const handleDelete = () => {  
-    console.log('deleted')
+  
+  const handleDelete = () => {
+    console.log('Delete')
   };
+  
 
   const handleSave = () => {
     setIsEditing(false);
