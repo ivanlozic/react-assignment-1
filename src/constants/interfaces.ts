@@ -1,8 +1,11 @@
-export interface SinglePost {
+export interface BaseProps {
   userId: number;
   id: number;
-  title: string;
   body: string;
+}
+
+export interface SinglePost extends BaseProps {
+  title: string;
 }
 
 export interface User {
@@ -25,24 +28,13 @@ export interface SingleComment {
   body: string;
 }
 
-export interface PostProps {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
+export interface PostProps extends SinglePost {
   userName: string;
   showUnderline?: boolean;
   comments: SingleComment[];
 }
 
-export interface CommentProps {
-  name: string;
-  body: string;
-  email: string;
-  postId: number;
-  id: number;
- 
-}
+export type CommentProps = SingleComment;
 
 export interface ToggleCommentsButtonProps {
   showComments: boolean;
