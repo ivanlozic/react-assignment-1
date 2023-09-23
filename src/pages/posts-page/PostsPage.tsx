@@ -11,7 +11,7 @@ import useUser from '../../hooks/useUser/useUser';
 import { axiosInstance } from '../../config/axios';
 import { Spinner } from '../../components/spinner';
 import { LoginForm } from '../../components/login-form';
-import { Header } from '../../components/header';
+import { Header } from '../../layout/header';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../reduxStore/store';
 

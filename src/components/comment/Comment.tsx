@@ -6,7 +6,7 @@ import styles from './Comment.module.scss';
 import { RootState } from '../../reduxStore/store';
 
 
-const Comment = ({ name, body, email,id, postId}: CommentProps): JSX.Element => {
+const Comment = ({ name, body, email}: CommentProps): JSX.Element => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [commentText, setCommentText] = useState(body);
   const [isEditing, setIsEditing] = useState(false);
