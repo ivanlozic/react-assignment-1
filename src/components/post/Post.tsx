@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Comment } from '../comment';
 import styles from './Post.module.scss';
 import { CustomRedirect } from '../custom-redirect';
@@ -23,16 +23,30 @@ const Post = ({
   const user = useSelector((state: RootState) => state.auth.user);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [editedBody, setEditedBody] = useState<string>(body);
-
+  const [isCreateCommentOpen, setIsCreateCommentOpen] =
+    useState<boolean>(false);
+  const [newComment, setNewComment] = useState<string>('');
+  const [postComments, setPostComments] = useState<SingleComment[]>([]);
 
   const isCurrentUserAuthor = user?.name === userName;
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
 
+  useEffect(() => {
+    if (comments.length > 0) {
+      setPostComments(comments);
+    }
+  }, []);
+
+  const handleDeleteComment = (commentId: number) => {
+    const updatedComments = postComments.filter(
+      (comment) => comment.id !== commentId
+    );
+    setPostComments(updatedComments);
+  };
+
   const handleToggleComments = () => {
     setShowComments((prevState) => !prevState);
   };
-
- 
 
   const handleOpenEditModal = () => {
     setEditedBody(body);
@@ -41,6 +55,29 @@ const Post = ({
 
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
+  };
+
+  const handleOpenCreateComment = () => {
+    setIsCreateCommentOpen(!isCreateCommentOpen);
+  };
+  const handleCreateComment = () => {
+    if (newComment.trim() === '') {
+      return;
+    }
+
+    const newCommentObj: SingleComment = {
+      postId: id,
+      id: comments.length + 1,
+      name: user?.name || 'Anonymous',
+      email: user?.email || '',
+      body: newComment,
+    };
+
+    postComments.push(newCommentObj);
+
+    setNewComment('');
+
+    setIsCreateCommentOpen(false);
   };
 
   const handleEditPost = () => {
@@ -108,17 +145,36 @@ const Post = ({
 
       {showComments && (
         <div className={styles.comment}>
-          <h3>Comments:</h3>
-          {comments?.map((comment: SingleComment) => (
-            <Comment
-              key={comment.id}
-              id={comment.id}
-              postId={id}
-              name={comment.name}
-              email={comment.email}
-              body={comment.body}
-            />
-          ))}
+          {postComments.length === 0 ? (
+            <p>No comments available.</p>
+          ) : (
+            <>
+              <h3>Comments:</h3>
+              {postComments?.map((comment: SingleComment) => (
+                <Comment
+                  key={comment.id}
+                  id={comment.id}
+                  postId={id}
+                  name={comment.name}
+                  email={comment.email}
+                  body={comment.body}
+                  onDelete={handleDeleteComment}
+                />
+              ))}
+            </>
+          )}
+        </div>
+      )}
+
+      <button onClick={handleOpenCreateComment}>Add Comment</button>
+
+      {isCreateCommentOpen && (
+        <div>
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <button onClick={handleCreateComment}>Add Comment</button>
         </div>
       )}
 

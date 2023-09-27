@@ -26,6 +26,7 @@ export interface SingleComment {
   name: string;
   email: string;
   body: string;
+  onDelete?: (commentId: number) => void;
 }
 
 export interface PostProps extends SinglePost {

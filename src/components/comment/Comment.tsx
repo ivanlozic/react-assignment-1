@@ -5,8 +5,13 @@ import HelloComponent from '../hoc/helloComponent/HelloComponent';
 import styles from './Comment.module.scss';
 import { RootState } from '../../reduxStore/store';
 
-
-const Comment = ({ name, body, email}: CommentProps): JSX.Element => {
+const Comment = ({
+  id,
+  name,
+  body,
+  email,
+  onDelete,
+}: CommentProps): JSX.Element => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [commentText, setCommentText] = useState(body);
   const [isEditing, setIsEditing] = useState(false);
@@ -14,11 +19,12 @@ const Comment = ({ name, body, email}: CommentProps): JSX.Element => {
   const handleEdit = () => {
     setIsEditing(true);
   };
-  
+
   const handleDelete = () => {
-    console.log('Delete')
+    if (onDelete) {
+      onDelete(id);
+    }
   };
-  
 
   const handleSave = () => {
     setIsEditing(false);
@@ -35,15 +41,21 @@ const Comment = ({ name, body, email}: CommentProps): JSX.Element => {
             onChange={(e) => setCommentText(e.target.value)}
             className={styles.textarea}
           />
-          <button className={styles.saveButton}  onClick={handleSave}>Save</button>
+          <button className={styles.saveButton} onClick={handleSave}>
+            Save
+          </button>
         </>
       ) : (
         <>
           <p className={styles.body}>{commentText}</p>
           {user && (
             <div className={styles.commentButtonsContainer}>
-              <button className={styles.commentButton} onClick={handleEdit}>Edit</button>
-              <button className={styles.commentButton} onClick={handleDelete}>Delete</button>
+              <button className={styles.commentButton} onClick={handleEdit}>
+                Edit
+              </button>
+              <button className={styles.commentButton} onClick={handleDelete}>
+                Delete
+              </button>
             </div>
           )}
         </>
