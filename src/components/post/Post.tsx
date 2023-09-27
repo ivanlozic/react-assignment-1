@@ -26,7 +26,6 @@ const Post = ({
     useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>('');
   const [postComments, setPostComments] = useState<SingleComment[]>([]);
-  
 
   const isCurrentUserAuthor = user?.name === userName;
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
@@ -174,13 +173,13 @@ const Post = ({
               ))}
             </>
           )}
+
+          <button onClick={handleOpenCreateComment}>Add Comment</button>
         </div>
       )}
 
-      <button onClick={handleOpenCreateComment}>Add Comment</button>
-
       {isCreateCommentOpen && (
-        <div>
+        <div className={styles.commentInputContainer}>
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}

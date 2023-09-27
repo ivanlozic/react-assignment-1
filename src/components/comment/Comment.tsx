@@ -48,7 +48,7 @@ const Comment = ({
       ) : (
         <>
           <p className={styles.body}>{commentText}</p>
-          {user && (
+          {user?.email === email && (
             <div className={styles.commentButtonsContainer}>
               <button className={styles.commentButton} onClick={handleEdit}>
                 Edit
