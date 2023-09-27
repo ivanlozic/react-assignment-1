@@ -16,7 +16,6 @@ const Post = ({
   body,
   id,
   userName,
-  comments,
   showUnderline = false,
 }: PostProps): JSX.Element => {
   const [showComments, setShowComments] = useState<boolean>(false);
@@ -27,14 +26,26 @@ const Post = ({
     useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>('');
   const [postComments, setPostComments] = useState<SingleComment[]>([]);
+  
 
   const isCurrentUserAuthor = user?.name === userName;
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
 
-  useEffect(() => {
-    if (comments.length > 0) {
+  const fetchCommentsForPost = async (id: number) => {
+    try {
+      const response = await axiosInstance.get(
+        `${axiosRoutes.comments.COMMENTS}${id}`
+      );
+      const comments = response.data;
       setPostComments(comments);
+    } catch (err) {
+      console.error('Error fetching comments:', err);
+      throw err;
     }
+  };
+
+  useEffect(() => {
+    fetchCommentsForPost(id);
   }, []);
 
   const handleDeleteComment = (commentId: number) => {
@@ -67,7 +78,7 @@ const Post = ({
 
     const newCommentObj: SingleComment = {
       postId: id,
-      id: comments.length + 1,
+      id: postComments.length + 1,
       name: user?.name || 'Anonymous',
       email: user?.email || '',
       body: newComment,
@@ -85,7 +96,7 @@ const Post = ({
       id,
       title,
       userName,
-      comments,
+      postComments,
       body: editedBody,
     };
 

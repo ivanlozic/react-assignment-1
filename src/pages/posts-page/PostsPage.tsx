@@ -4,11 +4,10 @@ import Post from '../../components/post/Post';
 import styles from './PostPage.module.scss';
 import HelloComponent from '../../components/hoc/helloComponent/HelloComponent';
 import Pagination from '../../components/pagination/Pagination';
-import { SingleComment, SinglePost } from '../../constants/interfaces';
+import {  SinglePost } from '../../constants/interfaces';
 import { axiosRoutes } from '../../constants/constants';
 import useFetch from '../../hooks/useFetch/useFetch';
 import useUser from '../../hooks/useUser/useUser';
-import { axiosInstance } from '../../config/axios';
 import { Spinner } from '../../components/spinner';
 import { LoginForm } from '../../components/login-form';
 import { Header } from '../../layout/header';
@@ -23,28 +22,14 @@ const PostsPage = (): JSX.Element => {
   const [itemsPerPage] = useState<number>(10);
   const { data: posts } = useFetch<SinglePost[]>(axiosRoutes.posts.POSTS);
   const { getUserName } = useUser();
-  const [comments, setComments] = useState<{ [key: number]: SingleComment[] }>(
-    {}
-  );
+
   const user = useSelector((state: RootState) => state.auth.user);
   
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalFilteredPosts = filteredPosts.length;
-  
-  const fetchCommentsForPost = async (id: number): Promise<SingleComment[]> => {
-    try {
-      const response = await axiosInstance.get(
-        `${axiosRoutes.comments.COMMENTS}${id}`
-      );
-      const comments = response.data;
-      return comments;
-    } catch (err) {
-      console.error('Error fetching comments:', err);
-      return [];
-    }
-  };
+
 
   useEffect(() => {
     if (posts) {
@@ -55,23 +40,6 @@ const PostsPage = (): JSX.Element => {
       );
       setFilteredPosts(filtered);
       setTotalPages(Math.ceil(filtered.length / itemsPerPage));
-
-      const fetchComments = async () => {
-        const commentsData: { [key: number]: SingleComment[] } = {};
-        const promises = posts.map(async (post) => {
-          try {
-            const comments = await fetchCommentsForPost(post.id);
-            commentsData[post.id] = comments;
-          } catch (error) {
-            console.error('Error fetching comments:', error);
-            commentsData[post.id] = [];
-          }
-        });
-
-        await Promise.all(promises);
-        setComments(commentsData);
-      };
-      fetchComments();
     }
   }, [posts, filter, getUserName]);
 
@@ -113,7 +81,6 @@ const PostsPage = (): JSX.Element => {
             userId={post.userId}
             userName={getUserName(post.userId)}
             showUnderline={true}
-            comments={comments[post.id]}
           />
         ))
       ) : (

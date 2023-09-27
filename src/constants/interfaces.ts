@@ -32,7 +32,6 @@ export interface SingleComment {
 export interface PostProps extends SinglePost {
   userName: string;
   showUnderline?: boolean;
-  comments: SingleComment[];
 }
 
 export type CommentProps = SingleComment;
