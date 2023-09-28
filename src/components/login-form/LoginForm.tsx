@@ -2,11 +2,11 @@ import React, { useState, FormEvent } from 'react';
 import styles from './LoginForm.module.scss';
 import HelloComponent from '../hoc/helloComponent/HelloComponent';
 import { Link } from 'react-router-dom';
-import { loginUser } from '../../reduxStore/reducers/authSlice';
 import { useDispatch } from 'react-redux';
 import { User } from '../../constants/interfaces';
 import useFetch from '../../hooks/useFetch/useFetch';
 import { axiosRoutes } from '../../constants/constants';
+import { userLoggedIn } from '../../reduxStore/reducers/authReducer';
 
 const LoginForm = () => {
   const [username, setName] = useState('');
@@ -24,7 +24,7 @@ const LoginForm = () => {
     console.log(matchingUser);
 
     if (matchingUser && matchingUser.name === password) {
-      dispatch(loginUser(matchingUser));
+      dispatch(userLoggedIn(matchingUser));
       console.log('Login successful');
     } else {
       console.error('Login failed');

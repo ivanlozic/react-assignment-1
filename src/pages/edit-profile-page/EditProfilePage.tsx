@@ -1,10 +1,10 @@
 import React, { useState, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { User } from '../../constants/interfaces';
-import { updateUser } from '../../reduxStore/reducers/authSlice';
 import styles from './EditProfilePage.module.scss';
-import { RootState } from '../../reduxStore/store';
+import { RootState } from '../../reduxStore/reducers/index';
 import { CustomRedirect } from '../../components/custom-redirect';
+import { userUpdated } from '../../reduxStore/reducers/updateUserReducer';
 
 const EditProfilePage = () => {
   const dispatch = useDispatch();
@@ -43,13 +43,13 @@ const EditProfilePage = () => {
       },
     };
 
-    dispatch(updateUser(editedUser));
+    dispatch(userUpdated(editedUser));
   };
 
   return (
     <div className={styles.container}>
       <CustomRedirect to="/posts">
-        <button>Back to Home Page</button>
+        <button className={styles.backButton}>Back to Home Page</button>
       </CustomRedirect>
       <h1>Edit Profile</h1>
       <form onSubmit={handleSubmit}>

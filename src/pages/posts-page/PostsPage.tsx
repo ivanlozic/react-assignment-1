@@ -12,7 +12,7 @@ import { Spinner } from '../../components/spinner';
 import { LoginForm } from '../../components/login-form';
 import { Header } from '../../layout/header';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../reduxStore/store';
+import { RootState } from '../../reduxStore/reducers/index';
 
 const PostsPage = (): JSX.Element => {
   const [filter, setFilter] = useState<string>('');

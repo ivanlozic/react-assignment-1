@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../../constants/interfaces';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../reduxStore/reducers/authSlice';
 import { Link } from 'react-router-dom';
 import { axiosRoutes } from '../../constants/constants';
 import { axiosInstance } from '../../config/axios';
+import { userLoggedOut } from '../../reduxStore/reducers/authReducer';
 
 interface HeaderProps {
   user: User | null;
@@ -73,7 +73,7 @@ const Header = ({ user }: HeaderProps): JSX.Element => {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    dispatch(userLoggedOut());
   };
 
   return (

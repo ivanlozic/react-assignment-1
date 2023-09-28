@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { CommentProps } from '../../constants/interfaces';
 import HelloComponent from '../hoc/helloComponent/HelloComponent';
 import styles from './Comment.module.scss';
-import { RootState } from '../../reduxStore/store';
+import { RootState } from '../../reduxStore/reducers/index';
 
 const Comment = ({
   id,

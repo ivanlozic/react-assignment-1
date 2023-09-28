@@ -107,7 +107,7 @@ const RegisterPage = () => {
     <div className={styles.container}>
       <h1>Create Account</h1>
       <CustomRedirect to="/posts">
-        <button>Back to Home Page</button>
+        <button className={styles.backButton}>Back to Home Page</button>
       </CustomRedirect>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>

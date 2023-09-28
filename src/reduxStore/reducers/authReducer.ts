@@ -6,12 +6,13 @@ export interface AuthState {
   user: User | null;
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
 };
 
-const authSlice = createSlice({
+
+const authReducer = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -23,11 +24,10 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-    updateUser: (state, action) => {
-      state.user = action.payload;
-    },
   },
 });
 
-export const { loginUser, logoutUser, updateUser } = authSlice.actions;
-export default authSlice.reducer;
+export const userLoggedIn = authReducer.actions.loginUser;
+export const userLoggedOut = authReducer.actions.logoutUser;
+
+export default authReducer.reducer;

@@ -8,7 +8,7 @@ import { ToggleCommentsButton } from '../button/toggle-comment';
 import { useSelector } from 'react-redux';
 import { axiosRoutes } from '../../constants/constants';
 import { axiosInstance } from '../../config/axios';
-import { RootState } from '../../reduxStore/store';
+import { RootState } from '../../reduxStore/reducers/index';
 import CustomModal from '../customModal/CustomModal';
 
 const Post = ({

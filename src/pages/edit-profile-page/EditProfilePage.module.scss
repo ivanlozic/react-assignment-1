@@ -52,14 +52,14 @@ label {
 }
 
 .backButton {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  position: absolute;
+  left: 20px;
+  background-color: #000000;
+  color: #fff;
+  padding: 10px 15px;
   text-decoration: none;
-  color: #070707;
-  font-size: 16px;
-}
-
-.backButton:hover {
-  text-decoration: underline;
+  cursor: pointer;
+  font-weight: bold;
 }
