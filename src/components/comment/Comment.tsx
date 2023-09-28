@@ -33,7 +33,9 @@ const Comment = ({
   return (
     <div className={styles.comment}>
       <h4 className={styles.name}>Name: {name}</h4>
-      <p className={styles.email}>Email: {email}</p>
+      {email && email.trim() !== '' && (
+        <p className={styles.email}>Email: {email}</p>
+      )}
       {isEditing ? (
         <>
           <textarea

@@ -4,12 +4,12 @@ import styles from './Post.module.scss';
 import { CustomRedirect } from '../custom-redirect';
 import { PostProps, SingleComment } from '../../constants/interfaces';
 import HelloComponent from '../hoc/helloComponent/HelloComponent';
-import Modal from 'react-modal';
 import { ToggleCommentsButton } from '../button/toggle-comment';
 import { useSelector } from 'react-redux';
 import { axiosRoutes } from '../../constants/constants';
 import { axiosInstance } from '../../config/axios';
 import { RootState } from '../../reduxStore/store';
+import CustomModal from '../customModal/CustomModal';
 
 const Post = ({
   title,
@@ -20,15 +20,24 @@ const Post = ({
 }: PostProps): JSX.Element => {
   const [showComments, setShowComments] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.auth.user);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [editedBody, setEditedBody] = useState<string>(body);
   const [isCreateCommentOpen, setIsCreateCommentOpen] =
     useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>('');
   const [postComments, setPostComments] = useState<SingleComment[]>([]);
+  const [isCustomModalOpen, setIsCustomModalOpen] = useState<boolean>(false);
 
   const isCurrentUserAuthor = user?.name === userName;
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
+
+  const openCustomModal = () => {
+    setEditedBody(body);
+    setIsCustomModalOpen(true);
+  };
+
+  const closeCustomModal = () => {
+    setIsCustomModalOpen(false);
+  };
 
   const fetchCommentsForPost = async (id: number) => {
     try {
@@ -58,13 +67,8 @@ const Post = ({
     setShowComments((prevState) => !prevState);
   };
 
-  const handleOpenEditModal = () => {
-    setEditedBody(body);
-    setIsEditModalOpen(true);
-  };
-
   const handleCloseEditModal = () => {
-    setIsEditModalOpen(false);
+    setIsCustomModalOpen(false);
   };
 
   const handleOpenCreateComment = () => {
@@ -103,7 +107,7 @@ const Post = ({
       .put(`${axiosRoutes.posts.POSTS}/${id}`, updatedPostData)
       .then((response) => {
         console.log('Post updated successfully', response.data);
-        setIsEditModalOpen(false);
+        setIsCustomModalOpen(false);
       })
       .catch((error) => {
         console.error('Error updating post', error);
@@ -148,7 +152,7 @@ const Post = ({
 
       {isCurrentUserAuthor && (
         <div className={styles.editDeleteButtons}>
-          <button onClick={handleOpenEditModal}>Edit Post</button>
+          <button onClick={openCustomModal}>Edit Post</button>
           <button onClick={handleDeletePost}>Delete Post</button>
         </div>
       )}
@@ -178,7 +182,7 @@ const Post = ({
         </div>
       )}
 
-      {isCreateCommentOpen && (
+      {showComments && isCreateCommentOpen && (
         <div className={styles.commentInputContainer}>
           <textarea
             value={newComment}
@@ -188,39 +192,25 @@ const Post = ({
         </div>
       )}
 
-      <Modal
-        isOpen={isEditModalOpen}
-        onRequestClose={handleCloseEditModal}
-        contentLabel="Edit Post Modal"
-        className={styles.modalContainer}
-        ariaHideApp={false}
-      >
-        <div className={styles.modalContent}>
-          <h2 className={styles.modalTitles}>Edit Post</h2>
-          <textarea
-            value={editedBody}
-            onChange={(e) => setEditedBody(e.target.value)}
-            className={styles.modalTextarea}
-          />
-          <div className={styles.modalButtons}>
-            <button onClick={handleEditPost} className={styles.modalButtonOk}>
-              OK
-            </button>
-            <button
-              onClick={handleCloseEditModal}
-              className={styles.modalButtonCancel}
-            >
-              Cancel
-            </button>
-          </div>
-          <span
-            className={styles.modalCloseButton}
+      <CustomModal isOpen={isCustomModalOpen} onRequestClose={closeCustomModal}>
+        <h2 className={styles.modalTitles}>Edit Post</h2>
+        <textarea
+          value={editedBody}
+          onChange={(e) => setEditedBody(e.target.value)}
+          className={styles.modalTextarea}
+        />
+        <div className={styles.modalButtons}>
+          <button onClick={handleEditPost} className={styles.modalButtonOk}>
+            OK
+          </button>
+          <button
             onClick={handleCloseEditModal}
+            className={styles.modalButtonCancel}
           >
-            &times;
-          </span>
+            Cancel
+          </button>
         </div>
-      </Modal>
+      </CustomModal>
     </div>
   );
 };
