@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './CustomModal.module.scss'
-
+import styles from './CustomModal.module.scss';
 
 interface CustomModalProps {
   isOpen: boolean;
@@ -33,8 +32,11 @@ const CustomModal: React.FC<CustomModalProps> = ({
 
   return (
     <div className={styles.customModalOverlay} onClick={onRequestClose}>
-      <div className={styles.customModal}onClick={(e) => e.stopPropagation()}>
-        <button className={styles.customModalCloseButton} onClick={onRequestClose}>
+      <div className={styles.customModal} onClick={(e) => e.stopPropagation()}>
+        <button
+          className={styles.customModalCloseButton}
+          onClick={onRequestClose}
+        >
           &times;
         </button>
         <div className={styles.customModalContent}>{children}</div>
@@ -42,7 +44,5 @@ const CustomModal: React.FC<CustomModalProps> = ({
     </div>
   );
 };
-
-
 
 export default CustomModal;

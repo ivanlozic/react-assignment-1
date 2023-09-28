@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styles from './RegisterPage.module.scss';
-import { Link } from 'react-router-dom';
 import HelloComponent from '../../components/hoc/helloComponent/HelloComponent';
 import { User } from '../../constants/interfaces';
+import { CustomRedirect } from '../../components/custom-redirect';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState<User>({
@@ -93,9 +93,9 @@ const RegisterPage = () => {
           zipcode: formData.address.zipcode,
         },
       };
-      
+
       console.log('Post Data:', postData);
-      alert('User registered successfully');
+      alert('User registered successfully, checkout in console.log');
     }
   };
 
@@ -106,9 +106,9 @@ const RegisterPage = () => {
   return (
     <div className={styles.container}>
       <h1>Create Account</h1>
-      <Link to="/" className={styles.backButton}>
-        Back to Home Page
-      </Link>
+      <CustomRedirect to="/posts">
+        <button>Back to Home Page</button>
+      </CustomRedirect>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <input

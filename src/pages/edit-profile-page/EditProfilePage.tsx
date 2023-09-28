@@ -4,6 +4,7 @@ import { User } from '../../constants/interfaces';
 import { updateUser } from '../../reduxStore/reducers/authSlice';
 import styles from './EditProfilePage.module.scss';
 import { RootState } from '../../reduxStore/store';
+import { CustomRedirect } from '../../components/custom-redirect';
 
 const EditProfilePage = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ const EditProfilePage = () => {
 
   return (
     <div className={styles.container}>
+      <CustomRedirect to="/posts">
+        <button>Back to Home Page</button>
+      </CustomRedirect>
       <h1>Edit Profile</h1>
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>

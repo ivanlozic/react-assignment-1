@@ -48,7 +48,6 @@
     }
   }
 
-
   .modalContainer {
     position: fixed;
     top: 250px;
@@ -70,7 +69,6 @@
     max-width: 700px;
     width: 100%;
     text-align: center;
-
   }
 
   .modalTitle {
@@ -88,11 +86,9 @@
     resize: vertical;
   }
 
-
   .modalButtons {
     margin-top: 20px;
   }
-
 
   .modalButtonOk,
   .modalButtonCancel {
@@ -104,7 +100,6 @@
     border-radius: 5px;
     cursor: pointer;
   }
-
 
   .modalCloseButton {
     background-color: #040404;

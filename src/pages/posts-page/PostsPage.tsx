@@ -4,7 +4,7 @@ import Post from '../../components/post/Post';
 import styles from './PostPage.module.scss';
 import HelloComponent from '../../components/hoc/helloComponent/HelloComponent';
 import Pagination from '../../components/pagination/Pagination';
-import {  SinglePost } from '../../constants/interfaces';
+import { SinglePost } from '../../constants/interfaces';
 import { axiosRoutes } from '../../constants/constants';
 import useFetch from '../../hooks/useFetch/useFetch';
 import useUser from '../../hooks/useUser/useUser';
@@ -24,12 +24,11 @@ const PostsPage = (): JSX.Element => {
   const { getUserName } = useUser();
 
   const user = useSelector((state: RootState) => state.auth.user);
-  
+
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalFilteredPosts = filteredPosts.length;
-
 
   useEffect(() => {
     if (posts) {
@@ -42,7 +41,6 @@ const PostsPage = (): JSX.Element => {
       setTotalPages(Math.ceil(filtered.length / itemsPerPage));
     }
   }, [posts, filter, getUserName]);
-
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);
@@ -57,13 +55,8 @@ const PostsPage = (): JSX.Element => {
     <div className={styles.postPage}>
       <h1>Posts Page</h1>
       <div className={styles.header}>
-      
-      {user ? (
-  <Header user={user} />
-) : (
-  <LoginForm />
-)}
-    </div>
+        {user ? <Header user={user} /> : <LoginForm />}
+      </div>
       <input
         type="text"
         placeholder="Filter posts by username"
